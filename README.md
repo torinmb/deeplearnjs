@@ -1,7 +1,6 @@
----
-layout: page
-order: 1
----
+<a id="travis-badge" href="https://travis-ci.org/PAIR-code/deeplearnjs" alt="Build Status">
+  <img src="https://travis-ci.org/PAIR-code/deeplearnjs.svg?branch=master" />
+</a>
 
 # Getting started
 
@@ -100,9 +99,9 @@ Check back soon!
 
 ## Resources
 
-* [Tutorials](docs/tutorials/index.md)
+* [Tutorials](http://pair-code.github.io/deeplearnjs/docs/tutorials/index.html)
 * [API Reference](http://pair-code.github.io/deeplearnjs/docs/api/globals.html)
 * [Demos](http://pair-code.github.io/deeplearnjs/index.html#demos)
-* [Roadmap](docs/roadmap.md)
+* [Roadmap](http://pair-code.github.io/deeplearnjs/docs/roadmap.html)
 
 This is not an official Google product.

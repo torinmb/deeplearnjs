@@ -1,5 +1,6 @@
 node_modules/
 bower_components/
+<<<<<<< HEAD
 demos/**/*.ts
 demos/**/*.css
 demos/homepage/
@@ -7,3 +8,9 @@ scripts/
 coverage/
 _site/
 index.ts
+=======
+index.ts
+
+npm-debug.log
+.DS_Store
+>>>>>>> piano_perf_rnn

@@ -3,8 +3,22 @@
   "search.exclude": {
     "**/node_modules": true,
     "**/bower_components": true,
+<<<<<<< HEAD
     "_site/": true,
     "**/bundle.js": true,
     "docs/api/**/*": true
   }
+=======
+    "coverage/": true,
+    "dist/": true,
+    "**/bundle.js": true
+  },
+  "tslint.enable": true,
+  "tslint.run": "onType",
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "files.insertFinalNewline": true,
+  "editor.detectIndentation": false,
+  "typescript.tsdk": "node_modules/typescript/lib"
+>>>>>>> piano_perf_rnn
 }
