@@ -150,10 +150,8 @@ class LoopZ {
 
   encoder: Encoder;
   decoder: Decoder;
-  mode: string;
 
-  constructor(mode: string, callback: Function) {
-    this.mode = mode;
+  constructor(checkpointURL: string, callback: Function) {
     if (!isDeviceSupported) {
       callback(new Error("device is not supported"), this);
       return;
@@ -162,7 +160,7 @@ class LoopZ {
     math = new NDArrayMathGPU();
     // math.enableDebugMode()
 
-    this.initialize(mode).then((encoder_decoder: [Encoder, Decoder]) => {
+    this.initialize(checkpointURL).then((encoder_decoder: [Encoder, Decoder]) => {
       this.encoder = encoder_decoder[0];
       this.decoder = encoder_decoder[1];
       callback(null, this);
