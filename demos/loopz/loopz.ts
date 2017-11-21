@@ -151,7 +151,6 @@ class LoopZ {
   encoder: Encoder;
   decoder: Decoder;
   mode: string;
-  offset: Scalar;
 
   constructor(mode: string, callback: Function) {
     this.mode = mode;
@@ -159,7 +158,6 @@ class LoopZ {
       callback(new Error("device is not supported"), this);
       return;
     }
-    this.offset = Scalar.new(1);
 
     math = new NDArrayMathGPU();
     // math.enableDebugMode()
@@ -222,19 +220,19 @@ class LoopZ {
     
     const z = math.scope((keep, track) => {
       // One-hot encode
-      const startMelody = track(Array1D.new(noteSequences[0]));
+      const startSeq = track(Array1D.new(noteSequences[0]));
 
-      const oneHotStartMelody = math.oneHot(startMelody, this.decoder.outputDims);
-      const oneHotStartMelody3D = oneHotStartMelody.as3D(
-        1, oneHotStartMelody.shape[0], oneHotStartMelody.shape[1]);
+      const oneHotStartSeq = math.oneHot(startSeq, this.decoder.outputDims);
+      const oneHotStartSeq3D = oneHotStartSeq.as3D(
+        1, oneHotStartSeq.shape[0], oneHotStartSeq.shape[1]);
 
-      let batchedInput: Array3D = oneHotStartMelody3D;
+      let batchedInput: Array3D = oneHotStartSeq3D;
       for (let i = 1; i < noteSequences.length; i++) {
-        const endMelody = track(Array1D.new(noteSequences[1]));
-        const oneHotEndMelody = math.oneHot(endMelody, this.decoder.outputDims);
-        const oneHotEndMelody3D = oneHotEndMelody.as3D(
-          1, oneHotEndMelody.shape[0], oneHotEndMelody.shape[1]);
-        batchedInput = math.concat3D(batchedInput, oneHotEndMelody3D, 0);
+        const endSeq = track(Array1D.new(noteSequences[1]));
+        const oneHotEndSeq = math.oneHot(endSeq, this.decoder.outputDims);
+        const oneHotEndSeq3D = oneHotEndSeq.as3D(
+          1, oneHotEndSeq.shape[0], oneHotEndSeq.shape[1]);
+        batchedInput = math.concat3D(batchedInput, oneHotEndSeq3D, 0);
       }
       // Compute z values.
       return this.encoder.encode(batchedInput);
@@ -273,9 +271,7 @@ class LoopZ {
     });
 
     return math.scope(() => {
-      return math.subtract(
-        //Notes * 2 for longer size
-        this.decoder.decode(interpolatedZs, noteSequences[0].length), this.offset) as Array2D;
+      return this.decoder.decode(interpolatedZs, noteSequences[0].length);
     });
   }
 }
