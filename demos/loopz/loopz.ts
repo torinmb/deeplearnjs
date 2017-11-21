@@ -291,7 +291,7 @@ new LoopZ('./drums', async (err: Error, loopZ: LoopZ) => {
 
   var start = Date.now();
 
-  let data = await loopZ.encodeAndDecodeGPU(teaPots, 90);
+  let data = await loopZ.interpolate(teaPots, 90);
   console.log('optimized: ' + (Date.now() - start) / 1000.);
 
   for (let i = 0; i < data.shape[0]; i++) {
