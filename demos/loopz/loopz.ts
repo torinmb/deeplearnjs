@@ -170,7 +170,6 @@ class LoopZ {
   }
 
   initialize(checkpointURL: string) {
-    math = new NDArrayMathGPU();
     const reader = new CheckpointLoader(checkpointURL);
     return reader.getAllVariables().then(
       (vars: { [varName: string]: NDArray }) => {
